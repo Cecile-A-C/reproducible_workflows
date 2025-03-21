@@ -174,7 +174,7 @@ def save_files_rootdir(d=".", extensions=[".py"]):
 def make_workflow_reproducible(w_d="."):
 
     ''' make workflow reproducible (or at least try) '''
-    # todo test on linux/mac (works for windows)
+    # todo test on mac (works for windows+linux)
 
     r_d = os.path.join(w_d, "reproducibility")
     if os.path.exists(r_d):
