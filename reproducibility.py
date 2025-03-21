@@ -170,7 +170,7 @@ def save_files(d="."):
     #     shutil.copy2(f, os.path.join(d, f))
 
 
-def make_workflow_reproducible(w_d):
+def make_workflow_reproducible(w_d="."):
 
     ''' make workflow reproducible (or at least try) '''
     # todo test on linux/mac (works for windows)
@@ -188,3 +188,6 @@ def make_workflow_reproducible(w_d):
 
     # save conda env to text file
     export_conda_environment(r_d)
+
+if __name__ == "__main__":
+    make_workflow_reproducible()
