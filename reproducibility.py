@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 import subprocess
 import platform
@@ -148,26 +149,26 @@ def export_conda_environment(d=".", include_builds=False):
         print(f"Error exporting environment: {result.stderr}")
         return None
 
-    with open(os.path.join(d,f"conda_env_{current_env}_{timestamp}.yml"), 'w', encoding='utf-8') as f:
+    with open(os.path.join(d,f"conda_env_{timestamp}.yml"), 'w', encoding='utf-8') as f:
         f.write(result.stdout)
 
     print(f"Environment exported to {os.path.join(d,f'conda_env_{current_env}_{timestamp}.yml')}")
 
-def save_files(d="."):
+def save_files_rootdir(d=".", extensions=[".py"]):
     """
+    Save all the files in the root directory that end with certain extensions
 
     Args:
         d (str): Path where the files will be saved. """
 
-    # save python scripts to text files
-    files = ["workflow.py"]
-    for f in files:
-        shutil.copy2(f, os.path.join(d, f + ".txt"))
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    # save any other file needed
-    # files = [s for s in os.listdir(".") if s.endswith(".pdf")]
-    # for f in files:
-    #     shutil.copy2(f, os.path.join(d, f))
+    # save python scripts to text files
+    files = [s for s in os.listdir(".") if any(s.endswith(ext) for ext in extensions)]
+    # plus any other file
+    # files = files + []
+    for f in files:
+        shutil.copy2(f, os.path.join(d, f"{f}_{timestamp}.txt"))
 
 
 def make_workflow_reproducible(w_d="."):
@@ -181,7 +182,7 @@ def make_workflow_reproducible(w_d="."):
     os.mkdir(r_d)
 
     # save python scripts to text files
-    save_files(r_d)
+    save_files_rootdir(r_d, extensions=[".py"])
 
     # save git commit to text file
     save_git_commit_to_file(r_d)
