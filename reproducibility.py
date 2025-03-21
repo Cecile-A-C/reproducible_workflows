@@ -153,6 +153,23 @@ def export_conda_environment(d=".", include_builds=False):
 
     print(f"Environment exported to {os.path.join(d,f'conda_env_{current_env}_{timestamp}.yml')}")
 
+def save_files(d="."):
+    """
+
+    Args:
+        d (str): Path where the files will be saved. """
+
+    # save python scripts to text files
+    files = ["workflow.py"]
+    for f in files:
+        shutil.copy2(f, os.path.join(d, f + ".txt"))
+
+    # save any other file needed
+    # files = [s for s in os.listdir(".") if s.endswith(".pdf")]
+    # for f in files:
+    #     shutil.copy2(f, os.path.join(d, f))
+
+
 def make_workflow_reproducible(w_d):
 
     ''' make workflow reproducible (or at least try) '''
@@ -164,14 +181,7 @@ def make_workflow_reproducible(w_d):
     os.mkdir(r_d)
 
     # save python scripts to text files
-    files = ["workflow.py"]
-    for f in files:
-        shutil.copy2(f, os.path.join(r_d, f + ".txt"))
-
-    # save any other file needed
-    # files = [s for s in os.listdir(".") if s.endswith(".pdf")]
-    # for f in files:
-    #     shutil.copy2(f, os.path.join(r_d, f + ".txt"))
+    save_files(r_d)
 
     # save git commit to text file
     save_git_commit_to_file(r_d)
