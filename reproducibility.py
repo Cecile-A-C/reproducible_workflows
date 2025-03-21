@@ -6,7 +6,7 @@ from datetime import datetime
 
 def save_git_commit_to_file(d="."):
     """
-    ChatGPT function - Saves git information to a text file, including:
+    Save git information to a text file, including:
     - Project name
     - Branch name
     - Current commit hash
@@ -16,12 +16,11 @@ def save_git_commit_to_file(d="."):
         (https://stackoverflow.com/questions/12214746/find-a-commit-on-github-given-the-commit-hash)
 
     Args:
-        d (str): Path to the output text file 'git_commit.txt' where the commit info will be saved.
-                Default is 'git_commit.txt' in the current directory.
+        d (str): Path to the output text file where the commit info will be saved.
     Returns:
         bool: True if the commit was successfully saved, False otherwise.
 
-    This function should work properly on all three platforms, as long as:
+    chatgpt says: This function should work properly on all three platforms, as long as:
         Git is installed and available in the system PATH
         Python 3 is installed
         The user has permissions to write to the specified file location
@@ -95,11 +94,10 @@ def save_git_commit_to_file(d="."):
 
 def export_conda_environment(d=".", include_builds=False):
     """
-    ChatGPT function - Export the current conda environment to a YAML file.
+    Export the current conda environment to a YAML file.
 
     Args:
-        d (str): Path to the output text file 'git_commit.txt' where the conda env info will be saved.
-                Default is 'git_commit.txt' in the current directory.
+        d (str): Path to the output text file where the conda env info will be saved.
         include_builds (bool, optional): Whether to include build numbers in the export. Default is False.
 
     Returns:
@@ -158,6 +156,7 @@ def export_conda_environment(d=".", include_builds=False):
 def make_workflow_reproducible(w_d):
 
     ''' make workflow reproducible (or at least try) '''
+    # todo test on linux/mac (works for windows)
 
     r_d = os.path.join(w_d, "reproducibility")
     if os.path.exists(r_d):
